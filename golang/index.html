@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Программа курса middle golang программист | Григорий Григоревский</title>
+<meta name="description" content="Программа курса middle golang программист: основы Golang, конкурентность, алгоритмы и SQL с упором на задачи и вопросы из реальных собеседований.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+      colors: {
+        ink: '#0F1222',
+        smoke: '#F6F6F9',
+        accent: {
+          DEFAULT: '#5B5BF6',
+          soft: '#EEEEFE',
+          dark: '#4646D9',
+        },
+        mint: '#DCFCE7',
+        peach: '#FFEDD5',
+        sky2: '#E0F2FE',
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(15,18,34,.04), 0 8px 24px rgba(15,18,34,.06)',
+        cardHover: '0 2px 4px rgba(15,18,34,.06), 0 16px 40px rgba(15,18,34,.12)',
+        cta: '0 8px 24px rgba(91,91,246,.35)',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      },
+    }
+  }
+}
+</script>
+<style type="text/tailwindcss">
+  @layer utilities {
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body class="bg-smoke text-ink font-sans antialiased">
+
+<!-- ══════════ NAV ══════════ -->
+<header class="sticky top-0 z-40 border-b border-ink/5 bg-smoke/80 backdrop-blur-xl">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+    <a href="../" class="flex items-center gap-2 font-extrabold tracking-tight">
+      <span class="grid h-8 w-8 place-items-center rounded-xl bg-accent font-mono text-sm text-white">Go</span>
+      <span class="hidden sm:inline">IT ментор<span class="text-accent">.</span>Golang</span>
+    </a>
+    <div class="hidden items-center gap-6 text-sm font-semibold text-ink/70 lg:flex">
+      <a href="../" class="transition hover:text-ink">Главная</a>
+      <a href="#program" class="transition hover:text-ink">Программа</a>
+      <a href="#price" class="transition hover:text-ink">Цены</a>
+      <a href="../system-design/" class="transition hover:text-ink">System Design</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="../#signup" class="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent">Записаться</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ══════════ HERO ══════════ -->
+<section class="relative overflow-hidden">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div class="absolute -top-32 right-[-10%] h-96 w-96 rounded-full bg-accent/15 blur-3xl"></div>
+    <div class="absolute top-40 left-[-10%] h-80 w-80 rounded-full bg-sky2 blur-3xl"></div>
+  </div>
+  <div class="relative mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 md:pb-20 md:pt-20">
+    <div class="max-w-3xl">
+      <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-accent-dark">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-accent"></span>
+        Индивидуально и в группах до 4 человек
+      </p>
+      <h1 class="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
+        Программа курса <span class="bg-gradient-to-r from-accent to-violet-500 bg-clip-text text-transparent">middle golang программист</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/70">
+        Курс охватывает основы Golang, конкурентность, алгоритмы и SQL с упором на задачи и вопросы из реальных собеседований.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a href="../#signup" class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">
+          Записаться на курс
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="#program" class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-7 py-3.5 font-bold text-ink shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover">Смотреть программу</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ПРОГРАММА ══════════ -->
+<section id="program" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6 md:py-24">
+  <div class="reveal max-w-3xl">
+    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Что внутри курса</h2>
+    <p class="mt-4 text-lg leading-relaxed text-ink/70">В материалах используются задачи и вопросы из реальных собеседований — без воды.</p>
+  </div>
+  <div class="reveal mt-12 space-y-3" id="modules"></div>
+</section>
+
+<!-- ══════════ ЦЕНЫ ══════════ -->
+<section id="price" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6 md:py-24">
+  <div class="reveal mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Цены</h2>
+    <p class="mt-4 text-lg leading-relaxed text-ink/70">Стоимость курса для групп (до 4-х человек) на 50% больше стоимости индивидуальных занятий.</p>
+  </div>
+  <div class="mx-auto mt-12 grid max-w-5xl gap-4 lg:grid-cols-3">
+    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
+      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Разовая консультация</p>
+      <p class="mt-3 text-4xl font-extrabold">4 500 ₽</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink/65">Вы можете выбрать тему из курса или задать свой вопрос.</p>
+      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
+        <li class="flex gap-2"><span class="text-accent">✓</span>1 час онлайн</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Теория и решение задач</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Материалы для самостоятельной работы</li>
+      </ul>
+      <a href="../#signup" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Записаться</a>
+    </div>
+    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
+      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Стандартный курс</p>
+      <p class="mt-3 text-4xl font-extrabold">35 000 ₽</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink/65">Все темы базового курса + углублённая подготовка к вопросам средней сложности.</p>
+      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
+        <li class="flex gap-2"><span class="text-accent">✓</span>8 онлайн-уроков с автором курса</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Моковое собеседование</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Обратная связь от ментора</li>
+      </ul>
+      <a href="../#signup" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Записаться</a>
+    </div>
+    <div class="reveal relative flex flex-col overflow-hidden rounded-4xl bg-ink p-8 text-white shadow-cardHover transition hover:-translate-y-1">
+      <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/40 blur-3xl" aria-hidden="true"></div>
+      <p class="relative inline-flex w-fit rounded-full bg-accent px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-white">Продвинутый курс</p>
+      <p class="relative mt-3 text-4xl font-extrabold">45 000 ₽</p>
+      <p class="relative mt-3 text-sm leading-relaxed text-white/70">Все темы стандартного курса + подготовка к сложным вопросам и кейсам.</p>
+      <ul class="relative mt-6 flex-1 space-y-2.5 text-sm text-white/75">
+        <li class="flex gap-2"><span class="text-accent">✓</span>Всё, что включено в стандартный курс</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>4 дополнительных онлайн-консультации</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Поддержка на время испытательного срока после трудоустройства</li>
+      </ul>
+      <a href="../#signup" class="relative mt-6 rounded-full bg-accent py-3.5 text-center font-bold text-white shadow-cta transition hover:bg-accent-dark">Записаться</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ФИНАЛЬНЫЙ CTA ══════════ -->
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+  <div class="reveal relative overflow-hidden rounded-4xl bg-ink p-8 text-center text-white shadow-cardHover sm:p-14">
+    <div class="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-violet-500/25 blur-3xl" aria-hidden="true"></div>
+    <h2 class="relative mx-auto max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">Готов получить офер на middle/middle+ golang разработчика?</h2>
+    <p class="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/70">Оформи заявку на курс, указав контактные данные и предпочтительные даты и время.</p>
+    <div class="relative mt-9 flex flex-wrap justify-center gap-3">
+      <a href="../#signup" class="rounded-full bg-accent px-7 py-3.5 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">Записаться на курс</a>
+      <a href="../" class="rounded-full bg-white px-7 py-3.5 font-bold text-ink transition hover:-translate-y-0.5">На главную</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ ФУТЕР ══════════ -->
+<footer class="border-t border-ink/5 bg-white pb-14 pt-14">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-3">
+    <div>
+      <a href="../" class="flex items-center gap-2 font-extrabold tracking-tight">
+        <span class="grid h-8 w-8 place-items-center rounded-xl bg-accent font-mono text-sm text-white">Go</span>
+        IT ментор<span class="text-accent">.</span>Golang
+      </a>
+      <p class="mt-4 text-sm leading-relaxed text-ink/50">Курс middle golang программист от Григория Григоревского.</p>
+    </div>
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wider text-ink/40">Навигация</p>
+      <ul class="mt-4 space-y-2.5 text-sm font-medium text-ink/70">
+        <li><a href="../" class="hover:text-accent">Главная</a></li>
+        <li><a href="#program" class="hover:text-accent">Программа</a></li>
+        <li><a href="#price" class="hover:text-accent">Цены</a></li>
+        <li><a href="../system-design/" class="hover:text-accent">Курс System Design</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wider text-ink/40">Контакты</p>
+      <ul class="mt-4 space-y-2.5 text-sm font-medium text-ink/70">
+        <li><a href="https://t.me/bigzhuk" target="_blank" rel="noopener" class="hover:text-accent">Telegram: @bigzhuk</a></li>
+        <li><a href="mailto:g.grigorevsky@gmail.com" class="hover:text-accent">g.grigorevsky@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="mx-auto mt-12 max-w-6xl border-t border-ink/5 px-4 pt-6 text-xs text-ink/40 sm:px-6">© <span id="year"></span> Григорий Григоревский. Все права защищены.</div>
+</footer>
+
+<script>
+// ── Данные модулей курса ──
+const MODULES = [
+  { n: '01', title: 'Теория',
+    items: ['Простые типы данных', 'Pointer', 'Slice', 'Map', 'Каналы', 'Context', 'Примитивы синхронизации', 'Конкурентность и go-рутины под капотом', 'Сборщик мусора', '«Наследование»', 'Стэк vs куча', 'Структура проекта'] },
+  { n: '02', title: 'Задачи «что выведет этот код»',
+    items: ['Slice', 'Map', 'Select', 'Pointer', 'Defer', 'Error', 'Duck Typing'] },
+  { n: '03', title: 'Задачи на конкурентность',
+    items: ['Пул воркеров', 'Семафор', 'Fan in / fan out', 'Отмена по таймауту'] },
+  { n: '04', title: 'Алгоритмические задачи',
+    items: ['Оценка сложности', 'Корнер-кейсы', 'Шаблоны алгоритмических задач с массивами', 'Шаблоны алгоритмических задач с мапой', 'Структуры данных, которые вам не понадобятся'] },
+  { n: '05', title: 'Практические задачи',
+    items: ['Подходы к решению практических задач', 'Key-value хранилище', 'Конкурентный health check', 'Заказ такси'] },
+  { n: '06', title: 'SQL',
+    items: ['ACID', 'Уровни изоляции транзакций', 'Партиционирование и шардинг', 'Индексы: вред и польза, типы, как применять', 'Проектирование таблиц, типы связей', 'WAL Log', 'Vacuum', 'SQL-запросы, которые попросят написать на собеседовании'] },
+  { n: '07', title: 'Очереди и кеш',
+    items: ['Отличие kafka от rabbit', 'Внутреннее устройство kafka', 'Алгоритмы инвалидации кеша', 'In memory cache vs persistence cache'] },
+];
+
+// ── Рендер модулей (аккордеон) ──
+const modulesEl = document.getElementById('modules');
+modulesEl.innerHTML = MODULES.map((m, i) => `
+  <details class="group rounded-3xl bg-white shadow-card transition open:shadow-cardHover" ${i === 0 ? 'open' : ''}>
+    <summary class="flex cursor-pointer select-none items-center gap-4 p-6 sm:p-7 [&::-webkit-details-marker]:hidden">
+      <span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent-soft font-mono text-sm font-bold text-accent-dark">${m.n}</span>
+      <span class="flex-1 text-base font-bold sm:text-lg">${m.title}</span>
+      <svg class="h-5 w-5 shrink-0 text-ink/40 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+    </summary>
+    <div class="px-6 pb-7 sm:px-7 lg:pl-[5.5rem]">
+      <p class="mb-3 font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Что разбираем</p>
+      <div class="flex flex-wrap gap-2">${m.items.map(t => `<span class="rounded-full bg-smoke px-3.5 py-1.5 text-xs font-semibold text-ink/70">${t}</span>`).join('')}</div>
+    </div>
+  </details>`).join('');
+
+// ── Появление блоков при скролле ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── Год в футере ──
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
