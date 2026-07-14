@@ -392,7 +392,16 @@ document.getElementById('signup-form').addEventListener('submit', function (e) {
   error.classList.add('hidden');
   button.disabled = true;
   button.textContent = 'Отправляем…';
-  fetch('/api/signup', { method: 'POST', body: new FormData(form) })
+  fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name.value.trim(),
+      contact: contact.value.trim(),
+      course: document.getElementById('f-course').value,
+      dates: document.getElementById('f-dates').value.trim(),
+    }),
+  })
     .then(r => { if (!r.ok) throw new Error('http ' + r.status); })
     .then(() => {
       form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);

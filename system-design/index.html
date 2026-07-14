@@ -212,6 +212,7 @@ tailwind.config = {
         </div>
         <button type="submit" class="w-full rounded-full bg-accent px-7 py-4 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">Отправить заявку</button>
         <p id="form-success" class="hidden rounded-2xl bg-mint px-4 py-3 text-center text-sm font-bold text-emerald-800">Спасибо! Заявка отправлена.</p>
+        <p id="form-error" class="hidden rounded-2xl bg-rose-100 px-4 py-3 text-center text-sm font-bold text-rose-700">Не получилось отправить. Напишите в Telegram <a href="https://t.me/bigzhuk" class="underline">@bigzhuk</a> или на почту.</p>
         <p class="text-center text-xs text-white/40">Нажимая кнопку, ты соглашаешься с политикой конфиденциальности.</p>
       </form>
     </div>
@@ -598,11 +599,36 @@ document.getElementById('mentor-form').addEventListener('submit', function (e) {
     if (!el.value.trim()) { el.classList.add('ring-2', 'ring-rose-400'); ok = false; }
   });
   if (!ok) return;
-  // TODO: подключи сюда отправку (Telegram-бот, Google Forms, email-сервис и т.п.)
-  this.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+  const form = this;
+  const button = form.querySelector('button[type="submit"]');
   const success = document.getElementById('form-success');
-  success.classList.remove('hidden');
-  success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  const error = document.getElementById('form-error');
+  error.classList.add('hidden');
+  button.disabled = true;
+  button.textContent = 'Отправляем…';
+  fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name.value.trim(),
+      contact: tg.value.trim(),
+      course: 'Менторство System Design',
+      level: document.getElementById('f-level').value,
+      goal: document.getElementById('f-goal').value,
+      comment: document.getElementById('f-comment').value.trim(),
+    }),
+  })
+    .then(r => { if (!r.ok) throw new Error('http ' + r.status); })
+    .then(() => {
+      form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+      success.classList.remove('hidden');
+      success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    })
+    .catch(() => {
+      button.disabled = false;
+      button.textContent = 'Отправить заявку';
+      error.classList.remove('hidden');
+    });
 });
 
 // ── Появление блоков при скролле ──

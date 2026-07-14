@@ -1,5 +1,5 @@
-// Сервер сайта golang-mentor: раздаёт статику и принимает заявки из формы,
-// отправляя их письмом через SMTP Яндекса.
+// Сервер сайта golang-mentor: раздаёт статику и принимает заявки из формы
+// (JSON), отправляя их письмом через SMTP Яндекса.
 //
 // Запуск:
 //
@@ -14,6 +14,7 @@ package main
 
 import (
 	"crypto/tls"
+	"encoding/json"
 	"fmt"
 	"log"
 	"mime"
@@ -110,42 +111,84 @@ func allow(ip string) bool {
 	return true
 }
 
+// signupRequest — тело JSON-запроса от форм сайта.
+// name и contact обязательны, остальные поля опциональны.
+type signupRequest struct {
+	Name    string `json:"name"`
+	Contact string `json:"contact"`
+	Course  string `json:"course,omitempty"`
+	Dates   string `json:"dates,omitempty"`
+	Level   string `json:"level,omitempty"`
+	Goal    string `json:"goal,omitempty"`
+	Comment string `json:"comment,omitempty"`
+}
+
 func signupHandler(cfg config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
 		if !allow(ip) {
-			http.Error(w, "слишком часто, попробуйте через минуту", http.StatusTooManyRequests)
-			return
-		}
-		if err := r.ParseForm(); err != nil {
-			http.Error(w, "некорректная форма", http.StatusBadRequest)
-			return
-		}
-		name := clean(r.FormValue("name"), 200)
-		contact := clean(r.FormValue("contact"), 200)
-		course := clean(r.FormValue("course"), 200)
-		dates := clean(r.FormValue("dates"), 1000)
-		if name == "" || contact == "" {
-			http.Error(w, "заполните имя и контакт", http.StatusBadRequest)
+			writeJSON(w, http.StatusTooManyRequests, "слишком часто, попробуйте через минуту")
 			return
 		}
 
-		body := fmt.Sprintf(
-			"Имя: %s\r\nКонтакт: %s\r\nЧто интересует: %s\r\nДаты и время: %s\r\nIP: %s\r\nВремя: %s\r\n",
-			name, contact, course, dates, ip, time.Now().Format("2006-01-02 15:04:05"),
-		)
-		if err := sendMail(cfg, "Новая заявка с сайта golang-mentor", body); err != nil {
-			log.Printf("ошибка отправки письма: %v", err)
-			http.Error(w, "не удалось отправить заявку, напишите на почту", http.StatusInternalServerError)
+		var req signupRequest
+		dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, 64<<10))
+		if err := dec.Decode(&req); err != nil {
+			writeJSON(w, http.StatusBadRequest, "некорректный JSON")
 			return
 		}
-		log.Printf("заявка от %q (%s) отправлена", name, contact)
-		w.WriteHeader(http.StatusOK)
-		fmt.Fprint(w, "ok")
+
+		req.Name = clean(req.Name, 200)
+		req.Contact = clean(req.Contact, 200)
+		req.Course = clean(req.Course, 200)
+		req.Dates = clean(req.Dates, 1000)
+		req.Level = clean(req.Level, 100)
+		req.Goal = clean(req.Goal, 200)
+		req.Comment = clean(req.Comment, 1000)
+
+		if req.Name == "" || req.Contact == "" {
+			writeJSON(w, http.StatusBadRequest, "заполните имя и контакт")
+			return
+		}
+
+		var b strings.Builder
+		add := func(label, value string) {
+			if value != "" {
+				fmt.Fprintf(&b, "%s: %s\r\n", label, value)
+			}
+		}
+		add("Имя", req.Name)
+		add("Контакт", req.Contact)
+		add("Что интересует", req.Course)
+		add("Даты и время", req.Dates)
+		add("Уровень", req.Level)
+		add("Цель", req.Goal)
+		add("Комментарий", req.Comment)
+		add("IP", ip)
+		add("Время", time.Now().Format("2006-01-02 15:04:05"))
+
+		if err := sendMail(cfg, "Новая заявка с сайта golang-mentor", b.String()); err != nil {
+			log.Printf("ошибка отправки письма: %v", err)
+			writeJSON(w, http.StatusInternalServerError, "не удалось отправить заявку, напишите на почту")
+			return
+		}
+		log.Printf("заявка от %q (%s) отправлена", req.Name, req.Contact)
+		writeJSON(w, http.StatusOK, "")
 	}
 }
 
-// clean обрезает строку и убирает переводы строк из однострочных полей.
+// writeJSON пишет единообразный JSON-ответ: {"ok": true} либо {"ok": false, "error": "..."}.
+func writeJSON(w http.ResponseWriter, status int, errMsg string) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(status)
+	resp := map[string]any{"ok": errMsg == ""}
+	if errMsg != "" {
+		resp["error"] = errMsg
+	}
+	_ = json.NewEncoder(w).Encode(resp)
+}
+
+// clean обрезает пробелы и ограничивает длину строки.
 func clean(s string, max int) string {
 	s = strings.TrimSpace(s)
 	if len(s) > max {
