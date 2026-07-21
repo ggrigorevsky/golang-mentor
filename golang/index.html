@@ -18,12 +18,12 @@ tailwind.config = {
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
-        ink: '#0F1222',
-        smoke: '#F6F6F9',
+        ink: 'rgb(var(--c-ink) / <alpha-value>)',
+        smoke: 'rgb(var(--c-smoke) / <alpha-value>)',
         accent: {
           DEFAULT: '#5B5BF6',
-          soft: '#EEEEFE',
-          dark: '#4646D9',
+          soft: 'rgb(var(--c-accent-soft) / <alpha-value>)',
+          dark: 'rgb(var(--c-accent-dark) / <alpha-value>)',
         },
         mint: '#DCFCE7',
         peach: '#FFEDD5',
@@ -45,6 +45,30 @@ tailwind.config = {
   @layer utilities {
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
+  }
+</style>
+<style>
+  :root{
+    --c-ink:15 18 34;
+    --c-smoke:246 246 249;
+    --c-accent-soft:238 238 254;
+    --c-accent-dark:70 70 217;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --c-ink:226 228 237;
+      --c-smoke:13 15 24;
+      --c-accent-soft:42 42 74;
+      --c-accent-dark:167 167 251;
+      color-scheme:dark;
+    }
+    .bg-white{ background-color:#191c2b !important; }
+    .bg-white\/90{ background-color:rgba(25,28,43,.9) !important; }
+    .bg-ink{ background-color:#0a0b14 !important; }
+    .from-ink\/80{ --tw-gradient-from:rgba(10,11,20,.8) !important; --tw-gradient-to:rgba(10,11,20,0) !important; --tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to) !important; }
+    .shadow-card{ box-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45) !important; }
+    .shadow-cardHover{ box-shadow:0 2px 4px rgba(0,0,0,.45),0 16px 40px rgba(0,0,0,.6) !important; }
   }
 </style>
 <script type="text/javascript">
