@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Программа курса middle golang программист | Григорий Григоревский</title>
-<meta name="description" content="Программа курса middle golang программист: основы Golang, конкурентность, алгоритмы и SQL с упором на задачи и вопросы из реальных собеседований.">
+<title>Курс Golang: подготовка к собеседованию | Григорий Григоревский</title>
+<meta name="description" content="Онлайн-курс по Golang и менторство 1:1 от техлида Lamoda. Подготовка к техническим секциям: язык, конкурентность, устройство рантайма, SQL.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -45,6 +45,8 @@ tailwind.config = {
   @layer utilities {
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.in { opacity: 1; transform: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   }
 </style>
 <style>
@@ -70,6 +72,13 @@ tailwind.config = {
     .shadow-card{ box-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45) !important; }
     .shadow-cardHover{ box-shadow:0 2px 4px rgba(0,0,0,.45),0 16px 40px rgba(0,0,0,.6) !important; }
   }
+
+  /* Кнопка «Курс на Stepik»: остаётся в hero, а когда её место уходит вверх — прилипает к экрану.
+     Место резервируется через min-height, чтобы вёрстка не дёргалась. */
+  #cta-slot{ min-height:3.25rem; }
+  @media (min-width:1024px){
+    .cta-stuck{ position:fixed; bottom:1.5rem; left:1.5rem; z-index:50; }
+  }
 </style>
 <script type="text/javascript">
   (function(m,e,t,r,i,k,a){
@@ -88,138 +97,265 @@ tailwind.config = {
 <!-- ══════════ NAV ══════════ -->
 <header class="sticky top-0 z-40 border-b border-ink/5 bg-smoke/80 backdrop-blur-xl">
   <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-    <a href="../" class="flex items-center gap-2 font-extrabold tracking-tight">
+    <a href="#top" class="flex items-center gap-2 font-extrabold tracking-tight">
       <span class="grid h-8 w-8 place-items-center rounded-xl bg-accent font-mono text-sm text-white">Go</span>
       <span class="hidden sm:inline">IT ментор<span class="text-accent">.</span>Golang</span>
     </a>
     <div class="hidden items-center gap-6 text-sm font-semibold text-ink/70 lg:flex">
       <a href="../" class="transition hover:text-ink">Главная</a>
-      <a href="#program" class="transition hover:text-ink">Программа</a>
-      <a href="#price" class="transition hover:text-ink">Цены</a>
-      <a href="../system-design/" class="transition hover:text-ink">System Design</a>
+      <a href="#program" class="transition hover:text-ink">Программа курса</a>
+      <a href="#mentorship" class="transition hover:text-ink">Менторство</a>
     </div>
     <div class="flex items-center gap-2">
-      <a href="../#signup" class="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent">Записаться</a>
+      <a href="#mentorship-form" class="hidden rounded-full px-4 py-2 text-sm font-semibold text-ink/70 transition hover:text-ink sm:inline-block">Менторство</a>
+      <a href="https://stepik.org/a/294637?utm_source=golang_mentor&utm_medium=landing" target="_blank" rel="noopener" class="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent">Купить курс</a>
     </div>
   </nav>
 </header>
 
 <main id="top">
 
-<!-- ══════════ HERO ══════════ -->
+<!-- ══════════ 1. HERO ══════════ -->
 <section class="relative overflow-hidden">
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
     <div class="absolute -top-32 right-[-10%] h-96 w-96 rounded-full bg-accent/15 blur-3xl"></div>
     <div class="absolute top-40 left-[-10%] h-80 w-80 rounded-full bg-sky2 blur-3xl"></div>
   </div>
-  <div class="relative mx-auto max-w-6xl px-4 pb-8 pt-7 sm:px-6 md:pb-10 md:pt-10">
+  <div class="relative mx-auto max-w-6xl px-4 pb-8 pt-7 sm:px-6 md:pb-12 md:pt-10">
     <div class="max-w-3xl">
-      <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-accent-dark">
-        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-accent"></span>
-        Индивидуально и в группах до 4 человек
-      </p>
       <h1 class="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
-        Программа курса <span class="bg-gradient-to-r from-accent to-violet-500 bg-clip-text text-transparent">middle golang программист</span>
+        Не провали интервью: <span class="bg-gradient-to-r from-accent to-violet-500 bg-clip-text text-transparent">Golang с нуля до оффера</span>
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/70">
-        Курс охватывает основы Golang, конкурентность, алгоритмы и SQL с упором на задачи и вопросы из реальных собеседований.
+        Онлайн-курс и менторство one-to-one от <strong class="font-semibold text-ink">Григория Григоревского</strong> — техлида Lamoda с опытом в Сбере, Самокате и Positive Technologies. Разберись в языке, конкурентности, устройстве рантайма и SQL и уверенно проходи технические секции собеседований.
       </p>
-      <div class="mt-10 flex flex-wrap items-center gap-3">
-        <a href="../#signup" class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">
-          Заявка на ментоство
+      <ul class="mt-8 grid gap-3 text-sm font-medium text-ink/80 sm:grid-cols-2">
+        <li class="flex items-start gap-2.5"><svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Курс можно проходить в удобном темпе</li>
+        <li class="flex items-start gap-2.5"><svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Подготовка к техническим секциям на реальном опыте</li>
+        <li class="flex items-start gap-2.5"><svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Задачи и вопросы с реальных собеседований</li>
+        <li class="flex items-start gap-2.5"><svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Гарантия: верну деньги, если содержание курса вам не подойдёт</li>
+        <li class="flex items-start gap-2.5"><svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Бесплатный демо-урок</li>
+        <li class="flex items-start gap-2.5"><svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Отвечу на вопросы в Telegram всем, кто проходит курс</li>
+      </ul>
+      <div id="cta-slot" class="mt-10 flex flex-wrap items-center gap-3">
+        <a id="stepik-cta" href="https://stepik.org/a/294637?utm_source=golang_mentor&utm_medium=landing" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">
+          Курс на Stepik — 1 490 ₽
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
-        <a href="#program" class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-7 py-3.5 font-bold text-ink shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover">Смотреть программу</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ ПРОГРАММА ══════════ -->
-<section id="program" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
+<!-- ══════════ 2. ЧТО Я ПРЕДЛАГАЮ ══════════ -->
+<section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal max-w-3xl">
+    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Что я предлагаю?</h2>
+    <p class="mt-6 text-lg leading-relaxed text-ink/70">Прежде всего, пройдите курс по Golang. А сложные вопросы, например: карьера, скрининг сильных и слабых сторон, мок-интервью — закрепите со мной на созвоне.</p>
+    <p class="mt-4 text-lg leading-relaxed text-ink/70">Учить теорию с ментором на онлайн-созвонах долго и дорого. Курс освещает вопросы для подготовки к собеседованию, и даёт возможность потренироваться на тестовых заданиях. Вы получаете структуру, разбор вопросов и задач и тренажёр за цену меньше, чем часовой созвон с ментором! Курс написан максимально просто, но если что-то осталось непонятным, вы можете написать мне в телегу. Для тех, кто проходит курс, я бесплатно отвечу на вопросы и подскажу, какую тему проработать, в том числе с нейронкой.
+    Нейронки неплохи, но тоже иногда ошибаются или как минимум делают упор не на том, что нужно. </p>
+    <p class="mt-4 text-lg leading-relaxed text-ink/70">Если помимо технической секции вам предстоит архитектурное интервью, я также предлагаю <a href="../system-design/" class="font-semibold text-accent-dark underline decoration-accent/40 underline-offset-4 transition hover:decoration-accent">курс по System Design</a>.</p>
+  </div>
+</section>
+
+<!-- ══════════ 3. ПРЕИМУЩЕСТВА ОНЛАЙН-КУРСА ══════════ -->
+<section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal max-w-3xl">
+    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">В чём преимущество онлайн-курса?</h2>
+  </div>
+  <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="reveal rounded-3xl bg-white p-7 shadow-card"><div class="mb-4 text-2xl">💰</div><h3 class="text-lg font-bold">Цена</h3><p class="mt-2 text-sm leading-relaxed text-ink/65">Стоимость курса меньше стоимости часового созвона с ментором.</p></div>
+    <div class="reveal rounded-3xl bg-white p-7 shadow-card"><div class="mb-4 text-2xl">🎯</div><h3 class="text-lg font-bold">Экономия времени</h3><p class="mt-2 text-sm leading-relaxed text-ink/65">Вам не нужно проматывать бесконечные видео на YouTube и прыгать между статьями на Хабре. Материал уже отобран на реальном опыте прохождения интервью и преподнесен с хорошими аналогиями и максимально понятно. </p></div>
+    <div class="reveal rounded-3xl bg-white p-7 shadow-card"><div class="mb-4 text-2xl">✅</div><h3 class="text-lg font-bold">Тренировка</h3><p class="mt-2 text-sm leading-relaxed text-ink/65">В конце каждого урока есть квиз, который позволяет убедиться, что материал усвоен.</p></div>
+  </div>
+</section>
+
+<!-- ══════════ 4. БЕСПЛАТНЫЙ МАТЕРИАЛ ══════════ -->
+<section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal relative overflow-hidden rounded-4xl bg-gradient-to-br from-accent to-violet-600 p-8 text-white shadow-cta sm:p-12">
+    <div class="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-white/10 blur-2xl" aria-hidden="true"></div>
+    <div class="relative max-w-2xl">
+      <p class="inline-flex rounded-full bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-wider">Бесплатно</p>
+      <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Не готов покупать курс? Начни с бесплатного материала</h2>
+      <p class="mt-4 text-lg leading-relaxed text-white/80">Получи первое представление о курсе через бесплатный демо-урок «Mutex и atomic».</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="https://stepik.org/a/294637?utm_source=golang_mentor&utm_medium=landing" target="_blank" rel="noopener" class="rounded-full bg-white px-7 py-3.5 font-bold text-accent-dark transition hover:-translate-y-0.5">Бесплатный урок на Stepik</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 5. КОМУ ПОДОЙДЕТ (bento) ══════════ -->
+<section id="audience" class="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal max-w-3xl">
+    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Кому подойдет обучение</h2>
+    <p class="mt-4 text-lg leading-relaxed text-ink/70">Курс и менторство для разработчиков, которые уже пишут на Go или переходят на него с другого языка, но хотят увереннее проходить технические секции собеседований.</p>
+  </div>
+  <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="reveal rounded-3xl bg-white p-7 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
+      <div class="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-mint font-mono text-sm font-semibold text-emerald-700">j→m</div>
+      <h3 class="text-lg font-bold">Junior → Middle</h3>
+      <p class="mt-2 text-sm leading-relaxed text-ink/65">Если ты готовишься к переходу на middle-позицию, обучение поможет структурировать знания, лучше отвечать на технические вопросы и увереннее объяснять свои решения на собеседованиях.</p>
+    </div>
+    <div class="reveal rounded-3xl bg-white p-7 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
+      <div class="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-sky2 font-mono text-sm font-semibold text-sky-700">mid</div>
+      <h3 class="text-lg font-bold">Middle-разработчикам</h3>
+      <p class="mt-2 text-sm leading-relaxed text-ink/65">Если ты уже работаешь в команде, но теряешься на вопросах про горутины, планировщик или сборщик мусора, курс закроет эти пробелы разбором реальных вопросов с собеседований.</p>
+    </div>
+    <div class="reveal rounded-3xl bg-white p-7 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
+      <div class="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-peach font-mono text-sm font-semibold text-orange-700">m+→s</div>
+      <h3 class="text-lg font-bold">Senior разработчикам</h3>
+      <p class="mt-2 text-sm leading-relaxed text-ink/65">Если ты хочешь расти дальше и проходить более сложные интервью, менторство поможет точечно разобрать пробелы, резюме, карьерную стратегию и подготовку к собеседованиям.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 6. ПРОГРАММА ══════════ -->
+<section id="program" class="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
   <div class="reveal max-w-3xl">
     <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Что внутри курса</h2>
-    <p class="mt-4 text-lg leading-relaxed text-ink/70">В материалах используются задачи и вопросы из реальных собеседований — без воды.</p>
+    <p class="mt-4 text-lg leading-relaxed text-ink/70">Курс «Не провали интервью: golang с нуля до оффера» — без воды и на реальных задачах: от основ языка и конкурентности до внутреннего устройства рантайма, инструментов, тестирования и SQL.</p>
   </div>
   <div class="reveal mt-12 space-y-3" id="modules"></div>
 </section>
 
-<!-- ══════════ ЦЕНЫ ══════════ -->
-<section id="price" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
-  <div class="reveal mx-auto max-w-3xl text-center">
-    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Цены</h2>
-    <p class="mt-4 text-lg leading-relaxed text-ink/70">Стоимость курса для групп (до 4-х человек) на 50% больше стоимости индивидуальных занятий.</p>
-  </div>
-  <div class="mx-auto mt-12 grid max-w-5xl gap-4 lg:grid-cols-3">
-    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
-      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Разовая консультация</p>
-      <p class="mt-3 text-4xl font-extrabold">4 500 ₽</p>
-      <p class="mt-3 text-sm leading-relaxed text-ink/65">Вы можете выбрать тему из курса или задать свой вопрос.</p>
-      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
-        <li class="flex gap-2"><span class="text-accent">✓</span>1 час онлайн</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Теория и решение задач</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Материалы для самостоятельной работы</li>
-      </ul>
-      <a href="../#signup" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Записаться</a>
+<!-- ══════════ 7. МЕНТОРСТВО ══════════ -->
+<section id="mentorship" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal rounded-4xl bg-white p-8 shadow-card sm:p-12">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Менторство, если нужна персональная подготовка</h2>
+      <p class="mt-4 text-lg leading-relaxed text-ink/70">Курс дает систему. Менторство помогает применить ее к твоей конкретной ситуации: уровню, резюме, целям, собеседованиям и карьерному треку.</p>
     </div>
-    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
-      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Стандартный курс</p>
-      <p class="mt-3 text-4xl font-extrabold">35 000 ₽</p>
-      <p class="mt-3 text-sm leading-relaxed text-ink/65">Все темы базового курса + углублённая подготовка к вопросам средней сложности.</p>
-      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
-        <li class="flex gap-2"><span class="text-accent">✓</span>8 онлайн-уроков с автором курса</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Моковое собеседование</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Обратная связь от ментора</li>
-      </ul>
-      <a href="../#signup" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Записаться</a>
-    </div>
-    <div class="reveal relative flex flex-col overflow-hidden rounded-4xl bg-ink p-8 text-white shadow-cardHover transition hover:-translate-y-1">
-      <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/40 blur-3xl" aria-hidden="true"></div>
-      <p class="relative inline-flex w-fit rounded-full bg-accent px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-white">Продвинутый курс</p>
-      <p class="relative mt-3 text-4xl font-extrabold">45 000 ₽</p>
-      <p class="relative mt-3 text-sm leading-relaxed text-white/70">Все темы стандартного курса + подготовка к сложным вопросам и кейсам.</p>
-      <ul class="relative mt-6 flex-1 space-y-2.5 text-sm text-white/75">
-        <li class="flex gap-2"><span class="text-accent">✓</span>Всё, что включено в стандартный курс</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>4 дополнительных онлайн-консультации</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Поддержка на время испытательного срока после трудоустройства</li>
-      </ul>
-      <a href="../#signup" class="relative mt-6 rounded-full bg-accent py-3.5 text-center font-bold text-white shadow-cta transition hover:bg-accent-dark">Записаться</a>
+    <div class="mt-10 grid gap-10 lg:grid-cols-2">
+      <div>
+        <h3 class="font-mono text-sm font-semibold uppercase tracking-wider text-accent-dark">Что разберем на менторстве</h3>
+        <ul class="mt-5 grid gap-x-6 gap-y-2.5 text-sm text-ink/75 sm:grid-cols-2">
+          <li class="flex gap-2"><span class="text-accent">→</span>Текущий уровень и пробелы</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Темы, которые подтянуть перед интервью</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Как улучшить резюме</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Подготовка к техническому скринингу</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Ответы на вопросы по Go и рантайму</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Как объяснять проекты из опыта</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Выбор компаний и вакансий</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Карьерный план</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Переход на следующий уровень</li>
+          <li class="flex gap-2"><span class="text-accent">→</span>Аргументация зарплатных ожиданий</li>
+        </ul>
+      </div>
+      <div class="rounded-3xl bg-smoke p-7">
+        <h3 class="font-mono text-sm font-semibold uppercase tracking-wider text-accent-dark">Кому подойдет</h3>
+        <ul class="mt-5 space-y-2.5 text-sm text-ink/75">
+          <li class="flex gap-2"><span class="text-accent">✓</span>Скоро собеседование</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Уже были отказы, и непонятно, почему</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Сложно описать опыт в резюме</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Хочешь перейти с junior на middle</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Хочешь вырасти с middle до middle+</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Нужна обратная связь по конкретным ответам</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Хочется двигаться по персональному плану</li>
+        </ul>
+        <a href="#mentorship-form" class="mt-7 block rounded-full bg-accent py-3.5 text-center font-bold text-white shadow-cta transition hover:bg-accent-dark">Оставить заявку на менторство</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ ФИНАЛЬНЫЙ CTA ══════════ -->
-<section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
-  <div class="reveal relative overflow-hidden rounded-4xl bg-ink p-8 text-center text-white shadow-cardHover sm:p-14">
-    <div class="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
-    <div class="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-violet-500/25 blur-3xl" aria-hidden="true"></div>
-    <h2 class="relative mx-auto max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">Хочешь получить офер на middle/senior golang разработчика?</h2>
-    <p class="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/70">Оформи заявку на курс, указав контактные данные и предпочтительные даты и время.</p>
-    <div class="relative mt-9 flex flex-wrap justify-center gap-3">
-      <a href="../#signup" class="rounded-full bg-accent px-7 py-3.5 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">Записаться на курс</a>
-      <a href="../" class="rounded-full bg-white px-7 py-3.5 font-bold text-ink transition hover:-translate-y-0.5">На главную</a>
+<!-- ══════════ 8. АВТОР ══════════ -->
+<section id="author" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal overflow-hidden rounded-4xl bg-white shadow-card">
+    <div class="grid items-stretch lg:grid-cols-5">
+      <div class="relative min-h-[320px] overflow-hidden bg-gradient-to-br from-accent to-violet-600 lg:col-span-2">
+        <img src="../images/grigory.jpg" alt="Григорий Григоревский — техлид Lamoda" class="absolute inset-0 h-full w-full object-cover object-top" loading="lazy">
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 to-transparent p-6 pt-16 text-white">
+          <p class="text-lg font-bold">Григорий Григоревский</p>
+          <p class="text-sm text-white/80">техлид Lamoda</p>
+        </div>
+      </div>
+      <div class="p-8 sm:p-12 lg:col-span-3">
+        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Кто ведет курс и менторство</h2>
+        <p class="mt-5 leading-relaxed text-ink/70">Курс и менторство ведет <strong class="font-semibold text-ink">Григорий Григоревский</strong> — техлид Lamoda с опытом в Сбере, Самокате и Positive Technologies.</p>
+        <p class="mt-3 leading-relaxed text-ink/70">В обучении фокус не на абстрактной теории, а на практическом подходе: как думать на интервью, как объяснять решения, как видеть систему целиком и как готовиться к следующему карьерному шагу.</p>
+        <div class="mt-7 flex flex-wrap gap-2">
+          <span class="rounded-full bg-accent-soft px-4 py-1.5 text-xs font-bold text-accent-dark">Техлид Lamoda</span>
+          <span class="rounded-full bg-smoke px-4 py-1.5 text-xs font-bold text-ink/70">Опыт в Сбере</span>
+          <span class="rounded-full bg-smoke px-4 py-1.5 text-xs font-bold text-ink/70">Опыт в Самокате</span>
+          <span class="rounded-full bg-smoke px-4 py-1.5 text-xs font-bold text-ink/70">Positive Technologies</span>
+          <span class="rounded-full bg-smoke px-4 py-1.5 text-xs font-bold text-ink/70">Подготовка к техническим секциям</span>
+          <span class="rounded-full bg-smoke px-4 py-1.5 text-xs font-bold text-ink/70">Менторство по IT-карьере</span>
+        </div>
+        <a href="#mentorship-form" class="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 font-bold text-white transition hover:bg-accent">Задать вопрос ментору</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 9. ФОРМА ЗАЯВКИ ══════════ -->
+<section id="mentorship-form" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal overflow-hidden rounded-4xl bg-ink text-white shadow-cardHover">
+    <div class="grid lg:grid-cols-2">
+      <div class="relative p-8 sm:p-12">
+        <div class="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
+        <h2 class="relative text-3xl font-extrabold tracking-tight sm:text-4xl">Оставить заявку на&nbsp;менторство</h2>
+        <p class="relative mt-4 text-lg leading-relaxed text-white/70">Расскажи коротко о своем опыте, целях и ближайших задачах — я отвечу и предложу формат работы.</p>
+        <div class="relative mt-8 rounded-3xl bg-white/5 p-6 ring-1 ring-white/10">
+          <p class="font-mono text-sm text-white/50">Индивидуальные онлайн-уроки</p>
+          <p class="mt-1 text-3xl font-extrabold">от 4 500 ₽ <span class="text-lg font-bold text-white/60">за урок</span></p>
+          <p class="mt-2 text-sm text-white/60">Персональная программа: Golang, System Design, резюме, стратегия собеседований, карьерный план.</p>
+        </div>
+      </div>
+      <form id="mentor-form" class="space-y-4 bg-white/[.04] p-8 ring-1 ring-white/10 sm:p-12" novalidate>
+        <div>
+          <label for="f-name" class="mb-1.5 block text-sm font-semibold text-white/80">Имя</label>
+          <input id="f-name" name="name" type="text" required placeholder="Как к тебе обращаться" class="w-full rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent">
+        </div>
+        <div>
+          <label for="f-tg" class="mb-1.5 block text-sm font-semibold text-white/80">Telegram</label>
+          <input id="f-tg" name="telegram" type="text" required placeholder="@username" class="w-full rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent">
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="f-level" class="mb-1.5 block text-sm font-semibold text-white/80">Текущий уровень</label>
+            <select id="f-level" name="level" class="w-full appearance-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent [&>option]:text-ink">
+              <option>junior</option><option>junior+</option><option>middle</option><option>middle+</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-goal" class="mb-1.5 block text-sm font-semibold text-white/80">Цель</label>
+            <select id="f-goal" name="goal" class="w-full appearance-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent [&>option]:text-ink">
+              <option>собеседование</option><option>рост до middle</option><option>рост дохода</option><option>разбор резюме</option><option>Golang</option><option>другое</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="f-comment" class="mb-1.5 block text-sm font-semibold text-white/80">Комментарий</label>
+          <textarea id="f-comment" name="comment" rows="3" placeholder="Пара слов о задаче" class="w-full resize-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
+        </div>
+        <button type="submit" class="w-full rounded-full bg-accent px-7 py-4 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">Отправить заявку</button>
+        <p id="form-success" class="hidden rounded-2xl bg-mint px-4 py-3 text-center text-sm font-bold text-emerald-800">Спасибо! Заявка отправлена.</p>
+        <p id="form-error" class="hidden rounded-2xl bg-rose-100 px-4 py-3 text-center text-sm font-bold text-rose-700">Не получилось отправить. Напишите в Telegram <a href="https://t.me/bigzhuk" class="underline">@bigzhuk</a> или на почту.</p>
+        <p class="text-center text-xs text-white/40">Нажимая кнопку, ты соглашаешься с политикой конфиденциальности.</p>
+      </form>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- ══════════ ФУТЕР ══════════ -->
-<footer class="border-t border-ink/5 bg-white pb-14 pt-14">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-3">
+<!-- ══════════ 10. ФУТЕР ══════════ -->
+<footer id="contacts" class="scroll-mt-20 border-t border-ink/5 bg-white pb-28 pt-14 lg:pb-14">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 md:grid-cols-4">
     <div>
-      <a href="../" class="flex items-center gap-2 font-extrabold tracking-tight">
+      <a href="#top" class="flex items-center gap-2 font-extrabold tracking-tight">
         <span class="grid h-8 w-8 place-items-center rounded-xl bg-accent font-mono text-sm text-white">Go</span>
         IT ментор<span class="text-accent">.</span>Golang
       </a>
-      <p class="mt-4 text-sm leading-relaxed text-ink/50">Курс middle golang программист от Григория Григоревского.</p>
+      <p class="mt-4 text-sm leading-relaxed text-ink/50">Подготовка к собеседованиям Golang и System Design от Григория Григоревского.</p>
     </div>
     <div>
       <p class="text-sm font-bold uppercase tracking-wider text-ink/40">Навигация</p>
       <ul class="mt-4 space-y-2.5 text-sm font-medium text-ink/70">
         <li><a href="../" class="hover:text-accent">Главная</a></li>
-        <li><a href="#program" class="hover:text-accent">Программа</a></li>
-        <li><a href="#price" class="hover:text-accent">Цены</a></li>
+        <li><a href="#program" class="hover:text-accent">Программа курса</a></li>
+        <li><a href="#mentorship" class="hover:text-accent">Менторство</a></li>
         <li><a href="../system-design/" class="hover:text-accent">Курс System Design</a></li>
       </ul>
     </div>
@@ -230,26 +366,58 @@ tailwind.config = {
         <li><a href="mailto:g.grigorevsky@gmail.com" class="hover:text-accent">g.grigorevsky@gmail.com</a></li>
       </ul>
     </div>
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wider text-ink/40">Документы</p>
+      <ul class="mt-4 space-y-2.5 text-sm font-medium text-ink/70">
+        <li><a href="#" class="hover:text-accent">Политика конфиденциальности</a></li>
+        <li><a href="#" class="hover:text-accent">Пользовательское соглашение</a></li>
+        <li><a href="#" class="hover:text-accent">Согласие на обработку персональных данных</a></li>
+      </ul>
+    </div>
   </div>
 </footer>
+
+<!-- ══════════ STICKY CTA (mobile) ══════════ -->
+<div class="fixed inset-x-0 bottom-0 z-50 border-t border-ink/5 bg-white/90 p-3 backdrop-blur-xl lg:hidden" style="padding-bottom: max(.75rem, env(safe-area-inset-bottom));">
+  <div class="mx-auto flex max-w-md gap-2">
+    <a href="https://stepik.org/a/294637?utm_source=golang_mentor&utm_medium=landing" target="_blank" rel="noopener" class="flex-1 rounded-full bg-accent py-3 text-center text-sm font-bold text-white shadow-cta">Купить курс</a>
+    <a href="#mentorship-form" class="flex-1 rounded-full bg-ink py-3 text-center text-sm font-bold text-white">Менторство</a>
+  </div>
+</div>
 
 <script>
 // ── Данные модулей курса ──
 const MODULES = [
-  { n: '01', title: 'Теория',
-    items: ['Простые типы данных', 'Pointer', 'Slice', 'Map', 'Каналы', 'Context', 'Примитивы синхронизации', 'Конкурентность и go-рутины под капотом', 'Сборщик мусора', '«Наследование»', 'Стэк vs куча', 'Структура проекта'] },
-  { n: '02', title: 'Задачи «что выведет этот код»',
-    items: ['Slice', 'Map', 'Select', 'Pointer', 'Defer', 'Error', 'Duck Typing'] },
-  { n: '03', title: 'Задачи на конкурентность',
-    items: ['Пул воркеров', 'Семафор', 'Fan in / fan out', 'Отмена по таймауту'] },
-  { n: '04', title: 'Алгоритмические задачи',
-    items: ['Оценка сложности', 'Корнер-кейсы', 'Шаблоны алгоритмических задач с массивами', 'Шаблоны алгоритмических задач с мапой', 'Структуры данных, которые вам не понадобятся'] },
-  { n: '05', title: 'Практические задачи',
-    items: ['Подходы к решению практических задач', 'Key-value хранилище', 'Конкурентный health check', 'Заказ такси'] },
-  { n: '06', title: 'SQL',
-    items: ['ACID', 'Уровни изоляции транзакций', 'Партиционирование и шардинг', 'Индексы: вред и польза, типы, как применять', 'Проектирование таблиц, типы связей', 'WAL Log', 'Vacuum', 'SQL-запросы, которые попросят написать на собеседовании'] },
-  { n: '07', title: 'Очереди и кеш',
-    items: ['Отличие kafka от rabbit', 'Внутреннее устройство kafka', 'Алгоритмы инвалидации кеша', 'In memory cache vs persistence cache'] },
+  { n: '01', title: 'Основы языка',
+    items: ['Простые типы данных в Go', 'Указатель', 'Слайс', 'Карта'],
+    result: 'Понимаешь, как в Go устроены значения и ссылки, почему слайс ведёт себя неожиданно при append и что не так с адресом элемента карты. Это фундамент, на котором строятся вопросы «что выведет этот код».' },
+
+  { n: '02', title: 'Структуры, интерфейсы и ошибки',
+    items: ['Структуры и методы', 'Интерфейсы', 'Обработка ошибок', 'Defer'],
+    result: 'Уверенно отвечаешь на главный вопрос секции — value receiver или pointer receiver, объясняешь, почему интерфейс с nil внутри не равен nil, и знаешь, когда defer выполнится, а когда нет.' },
+
+  { n: '03', title: 'Многозадачность',
+    items: ['Go-routine', 'Каналы', 'Context', 'Mutex и atomic', 'Разбор задач'],
+    tasks: ['Пул воркеров', 'Pipeline', 'Fan-out / fan-in', 'Семафор и rate limiter', 'Ping-pong', 'Порядок результатов', 'Таймаут без утечки горутин'],
+    result: 'Пишешь конкурентный код на живом кодинге без подсказок: ограничиваешь параллелизм, сохраняешь порядок результатов и не оставляешь висящих горутин. Семь классических задач разобраны построчно, каждую можно решить прямо в браузере.' },
+
+  { n: '04', title: 'Go под капотом',
+    items: ['Планировщик (GMP)', 'Garbage Collector'],
+    result: 'Объясняешь, что такое G, M и P, почему потоков бывает больше GOMAXPROCS и чем сетевое чтение отличается от файлового. Понимаешь, как работает сборщик мусора и что делать, когда под убивают по OOM.' },
+
+  { n: '05', title: 'Инструменты и организация кода',
+    items: ['Модули', 'Структура проекта', 'Тесты', 'Профайлер'],
+    result: 'Умеешь объяснить, как устроен проект и почему именно так, писать тесты, которые действительно что-то проверяют, и находить узкое место профайлером, а не догадками.' },
+
+  { n: '06', title: 'SQL для Go-разработчика',
+    items: ['Индексы', 'Уровни изоляции транзакций', 'Практика'],
+    tasks: ['Клиенты с завершёнными заказами', 'Сумма заказов и HAVING', 'LEFT JOIN и условие в ON', 'COUNT(*) против COUNT(колонка)', 'Агрегаты и NULL'],
+    result: 'Рисуешь по памяти таблицу аномалий и уровней изоляции, объясняешь, когда индекс не сработает, и пишешь запросы в интерактивном тренажёре — с проверкой на реальной базе.' },
+
+  { n: '07', title: 'Финальный босс: собеседование',
+    items: ['Задачи с реальных собеседований'],
+    tasks: ['Key-value хранилище с TTL', 'Параллельная проверка URL с сохранением порядка'],
+    result: 'Готов к формату, когда всю секцию занимает одна большая задача, а теорию спрашивают по ходу твоего же кода. Обе задачи с автопроверкой: тесты ловят и забытый TTL, и отсутствие мьютекса, и потерянный параллелизм.' },
 ];
 
 // ── Рендер модулей (аккордеон) ──
@@ -258,14 +426,60 @@ modulesEl.innerHTML = MODULES.map((m, i) => `
   <details class="group rounded-3xl bg-white shadow-card transition open:shadow-cardHover" ${i === 0 ? 'open' : ''}>
     <summary class="flex cursor-pointer select-none items-center gap-4 p-6 sm:p-7 [&::-webkit-details-marker]:hidden">
       <span class="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent-soft font-mono text-sm font-bold text-accent-dark">${m.n}</span>
-      <span class="flex-1 text-base font-bold sm:text-lg">${m.title}</span>
+      <span class="flex-1 text-base font-bold sm:text-lg">Модуль ${parseInt(m.n)}. ${m.title}</span>
       <svg class="h-5 w-5 shrink-0 text-ink/40 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
     </summary>
     <div class="px-6 pb-7 sm:px-7 lg:pl-[5.5rem]">
       <p class="mb-3 font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Что разбираем</p>
       <div class="flex flex-wrap gap-2">${m.items.map(t => `<span class="rounded-full bg-smoke px-3.5 py-1.5 text-xs font-semibold text-ink/70">${t}</span>`).join('')}</div>
+      ${m.tasks ? `<p class="mb-3 mt-5 font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Примеры задач</p>
+      <div class="flex flex-wrap gap-2">${m.tasks.map(t => `<span class="rounded-full bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent-dark">${t}</span>`).join('')}</div>` : ''}
+      <div class="mt-5 rounded-2xl bg-mint/60 p-4 text-sm leading-relaxed text-emerald-900"><strong class="font-bold">Результат:</strong> ${m.result}</div>
     </div>
   </details>`).join('');
+
+// ── Форма ──
+document.getElementById('mentor-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = document.getElementById('f-name');
+  const tg = document.getElementById('f-tg');
+  let ok = true;
+  [name, tg].forEach(el => {
+    el.classList.remove('ring-2', 'ring-rose-400');
+    if (!el.value.trim()) { el.classList.add('ring-2', 'ring-rose-400'); ok = false; }
+  });
+  if (!ok) return;
+  const form = this;
+  const button = form.querySelector('button[type="submit"]');
+  const success = document.getElementById('form-success');
+  const error = document.getElementById('form-error');
+  error.classList.add('hidden');
+  button.disabled = true;
+  button.textContent = 'Отправляем…';
+  fetch('/api/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: name.value.trim(),
+      contact: tg.value.trim(),
+      course: 'Менторство Golang',
+      level: document.getElementById('f-level').value,
+      goal: document.getElementById('f-goal').value,
+      comment: document.getElementById('f-comment').value.trim(),
+    }),
+  })
+    .then(r => { if (!r.ok) throw new Error('http ' + r.status); })
+    .then(() => {
+      form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+      success.classList.remove('hidden');
+      success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    })
+    .catch(() => {
+      button.disabled = false;
+      button.textContent = 'Отправить заявку';
+      error.classList.remove('hidden');
+    });
+});
 
 // ── Появление блоков при скролле ──
 const io = new IntersectionObserver(entries => {
@@ -273,8 +487,15 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ── Год в футере ──
-document.getElementById('year').textContent = new Date().getFullYear();
+// ── Кнопка на Stepik прилипает, когда её место в hero уходит за верх экрана ──
+(function () {
+  const slot = document.getElementById('cta-slot');
+  const cta = document.getElementById('stepik-cta');
+  if (!slot || !cta) return;
+  new IntersectionObserver(([entry]) => {
+    cta.classList.toggle('cta-stuck', !entry.isIntersecting);
+  }, { threshold: 0 }).observe(slot);
+})();
 </script>
 </body>
 </html>
