@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IT ментор: подготовка к собеседованию Golang</title>
-<meta name="description" content="IT ментор: обучение профессии golang программист. Помогу получить офер на middle/middle+ golang разработчика. Курсы по Golang и System Design, менторство 1:1.">
+<meta name="description" content="IT ментор: обучение профессии golang программист. Помогу получить оффер на middle/middle+ golang разработчика. Курсы по Golang и System Design, менторство 1:1.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -110,7 +110,7 @@ tailwind.config = {
       </div>
       <a href="#why" class="transition hover:text-ink">Почему я?</a>
       <a href="#about" class="transition hover:text-ink">Обо мне</a>
-      <a href="#price" class="transition hover:text-ink">Менторство</a>
+      <a href="#signup" class="transition hover:text-ink">Менторство</a>
       <a href="#reviews" class="transition hover:text-ink">Отзывы</a>
       <a href="#contacts" class="transition hover:text-ink">Контакты</a>
     </div>
@@ -141,13 +141,58 @@ tailwind.config = {
           Курсы
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
-        <a href="#price" class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-7 py-3.5 font-bold text-ink shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover">Менторство</a>
+        <a href="#signup" class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-7 py-3.5 font-bold text-ink shadow-card transition hover:-translate-y-0.5 hover:shadow-cardHover">Менторство</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ 2. ПОЧЕМУ ВАМ ЭТО НУЖНО ══════════ -->
+<!-- ══════════ 2. ЧТО Я ПРЕДЛАГАЮ ══════════ -->
+<section id="offer" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
+  <div class="reveal mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Что я предлагаю?</h2>
+  </div>
+  <div class="mx-auto mt-12 grid max-w-5xl gap-4 lg:grid-cols-3">
+
+    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
+      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Онлайн-курс</p>
+      <p class="mt-3 text-2xl font-extrabold leading-snug">Подготовка по цене одного созвона</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink/65">Вы сможете подготовиться к интервью по цене часового созвона с ментором.</p>
+      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
+        <li class="flex gap-2"><span class="text-accent">✓</span><a href="golang/" class="font-semibold text-accent-dark underline decoration-accent/40 underline-offset-4 transition hover:decoration-accent">Golang</a></li>
+        <li class="flex gap-2"><span class="text-accent">✓</span><a href="system-design/" class="font-semibold text-accent-dark underline decoration-accent/40 underline-offset-4 transition hover:decoration-accent">System Design</a></li>
+      </ul>
+      <a href="#courses" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Смотреть курсы</a>
+    </div>
+
+    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
+      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Проработка отдельных вопросов</p>
+      <p class="mt-3 text-2xl font-extrabold leading-snug">Вопрос в Telegram</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink/65">Вы можете проработать отдельные вопросы, задав их мне в Telegram.</p>
+      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
+        <li class="flex gap-2"><span class="text-accent">✓</span>Для тех, кто купил курс, это бесплатно</li>
+      </ul>
+      <a href="https://t.me/bigzhuk" target="_blank" rel="noopener" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Написать в Telegram</a>
+    </div>
+
+    <div class="reveal relative flex flex-col overflow-hidden rounded-4xl bg-ink p-8 text-white shadow-cardHover transition hover:-translate-y-1">
+      <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/40 blur-3xl" aria-hidden="true"></div>
+      <p class="relative inline-flex w-fit rounded-full bg-accent px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-white">Созвон с ментором</p>
+      <p class="relative mt-3 text-2xl font-extrabold leading-snug">Разбор один на один</p>
+      <p class="relative mt-3 text-sm leading-relaxed text-white/70">При необходимости обсудить отдельные темы:</p>
+      <ul class="relative mt-6 flex-1 space-y-2.5 text-sm text-white/75">
+        <li class="flex gap-2"><span class="text-accent">✓</span>Мок-интервью</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Разбор сильных и слабых сторон</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Разбор, как вести себя на интервью</li>
+        <li class="flex gap-2"><span class="text-accent">✓</span>Любой технический вопрос</li>
+      </ul>
+      <a href="#signup" class="relative mt-6 rounded-full bg-accent py-3.5 text-center font-bold text-white shadow-cta transition hover:bg-accent-dark">Оставить заявку</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ 3. ПОЧЕМУ ВАМ ЭТО НУЖНО ══════════ -->
 <section id="value" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
   <div class="reveal mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Почему вам это нужно?</h2>
@@ -156,8 +201,8 @@ tailwind.config = {
     <div class="reveal rounded-3xl bg-white p-7 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
       <div class="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-accent-soft text-xl">⏱</div>
       <h3 class="text-lg font-bold">Сэкономит время</h3>
-      <p class="mt-4 text-sm leading-relaxed text-ink/65">Время - ваш главный ресурс. Вся информация в курсе собрана на основе реального опыта и хорошо преподнесена: текст максимально понятный, а в конце каждого урока есть несколько тестовых заданий для тренировки.
-      Собирать эту информацию самостоятельно - тяжелый труд, который и близко не стоит денег, потраченных на курс.
+      <p class="mt-4 text-sm leading-relaxed text-ink/65">Время - ваш главный ресурс. Вся информация в курсе собрана на основе реального опыта и хорошо преподнесена, а в конце каждого урока есть несколько тестовых заданий для тренировки.
+      Собирать эту информацию самостоятельно - тяжелый труд, который не стоит денег, потраченных на курс.
       </p>
     </div>
     <div class="reveal rounded-3xl bg-white p-7 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
@@ -167,13 +212,13 @@ tailwind.config = {
     </div>
     <div class="reveal rounded-3xl bg-white p-7 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
       <div class="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-mint text-xl">💰</div>
-      <h3 class="text-lg font-bold">Выгоднее, чем онлайн-школа и занятия с ментором</h3>
-      <p class="mt-4 text-sm leading-relaxed text-ink/65">Занятия в онлайн-школах стоят десятки тысяч рублей и длятся месяцами. Видео-уроки — это медленно. Дело не в том, что я хочу продать вам свой курс (хотя кого я обманываю, дело как раз в этом), но поверьте: результат после моих курсов будет не хуже, а цена несопоставима. А с индивидуальным менторством результат точно будет лучше.</p>
+      <h3 class="text-lg font-bold">Выгоднее, чем онлайн-школа</h3>
+      <p class="mt-4 text-sm leading-relaxed text-ink/65">Занятия в онлайн-школах стоят десятки тысяч рублей и длятся месяцами. Видео-уроки — это медленно. Дело не в том, что я хочу продать вам свой курс (хотя кого я обманываю, дело как раз в этом), но поверьте: результат после моих курсов будет не хуже, а цена несопоставима. Учить все подряд с ментором не нужно. Но если добавить менторство точечно результат точно будет отличным.</p>
     </div>
   </div>
 </section>
 
-<!-- ══════════ 3. КУРСЫ ══════════ -->
+<!-- ══════════ 4. КУРСЫ ══════════ -->
 <section id="courses" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
   <div class="reveal mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Курсы</h2>
@@ -182,8 +227,8 @@ tailwind.config = {
   <div class="mx-auto mt-12 grid max-w-4xl gap-4 lg:grid-cols-2">
     <a href="golang/" class="reveal group flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
       <span class="grid h-12 w-12 place-items-center rounded-2xl bg-accent-soft font-mono text-base font-bold text-accent-dark">Go</span>
-      <h3 class="mt-5 text-2xl font-extrabold">Курс middle golang программист</h3>
-      <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/65">Основы Golang, конкурентность, алгоритмы и SQL с упором на задачи и вопросы из реальных собеседований: теория, задачи «что выведет этот код», конкурентность, практика, очереди и кеш.</p>
+      <h3 class="mt-5 text-2xl font-extrabold">Курс golang программист</h3>
+      <p class="mt-3 flex-1 text-sm leading-relaxed text-ink/65">Основы Golang, конкурентность, Go под капотом, SQL с упором на задачи и вопросы из реальных собеседований: теория, задачи «что выведет этот код», разобор больших и сложных задач. </p>
       <span class="mt-6 inline-flex items-center gap-2 font-bold text-accent-dark">Смотреть программу
         <svg class="h-4 w-4 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       </span>
@@ -192,15 +237,15 @@ tailwind.config = {
       <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/40 blur-3xl" aria-hidden="true"></div>
       <span class="relative grid h-12 w-12 place-items-center rounded-2xl bg-white/10 font-mono text-base font-bold text-white">SD</span>
       <h3 class="relative mt-5 text-2xl font-extrabold">Курс System Design</h3>
-      <p class="relative mt-3 flex-1 text-sm leading-relaxed text-white/70">Подготовка к архитектурным интервью: фреймворк ответа, базы данных, кеширование, API, брокеры сообщений и проектирование реальных систем с нуля. Курс на Stepik + менторство 1:1.</p>
-      <span class="relative mt-6 inline-flex items-center gap-2 font-bold text-white">Узнать больше
+      <p class="relative mt-3 flex-1 text-sm leading-relaxed text-white/70">Подготовка к архитектурным интервью: фреймворк ответа, базы данных, кеширование, API, брокеры сообщений и проектирование реальных систем с нуля.</p>
+      <span class="relative mt-6 inline-flex items-center gap-2 font-bold text-white">Смотреть программу
         <svg class="h-4 w-4 transition group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       </span>
     </a>
   </div>
 </section>
 
-<!-- ══════════ 4. ПОЧЕМУ Я ══════════ -->
+<!-- ══════════ 5. ПОЧЕМУ Я ══════════ -->
 <section id="why" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
   <div class="reveal max-w-3xl">
     <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Почему я могу помочь освоить golang и system design?</h2>
@@ -224,7 +269,7 @@ tailwind.config = {
         <li class="flex gap-2"><span class="text-accent">→</span>через 2 года стал лидом</li>
         <li class="flex gap-2"><span class="text-accent">→</span>через 3 года перешел с php на go</li>
         <li class="flex gap-2"><span class="text-accent">→</span>в качестве тим- и техлида поработал в sbermegamarket, samokat, positive technologies, lamoda</li>
-        <li class="flex gap-2"><span class="text-accent">→</span>лично прошел более 20 собеседований на позицию senior golang developer, получил ~80% оферов в том числе в WB, OZON, T-bank</li>
+        <li class="flex gap-2"><span class="text-accent">→</span>лично прошел более 20 собеседований на позицию senior golang developer, получил ~80% офферов в том числе в WB, OZON, T-bank</li>
       </ul>
     </div>
     <div class="reveal rounded-3xl bg-white p-7 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
@@ -239,7 +284,7 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- ══════════ 5. ОБО МНЕ ══════════ -->
+<!-- ══════════ 6. ОБО МНЕ ══════════ -->
 <section id="about" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
   <div class="reveal overflow-hidden rounded-4xl bg-white shadow-card">
     <div class="grid items-stretch lg:grid-cols-5">
@@ -262,52 +307,8 @@ tailwind.config = {
           <span class="rounded-full bg-smoke px-4 py-1.5 text-xs font-bold text-ink/70">Яндекс Практикум</span>
           <span class="rounded-full bg-smoke px-4 py-1.5 text-xs font-bold text-ink/70">~100 собеседований как наниматель</span>
         </div>
-        <a href="#price" class="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 font-bold text-white transition hover:bg-accent">Менторство</a>
+        <a href="#signup" class="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 font-bold text-white transition hover:bg-accent">Менторство</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ 6. МЕНТОРСТВО ══════════ -->
-<section id="price" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
-  <div class="reveal mx-auto max-w-3xl text-center">
-    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Цены на менторство</h2>
-    <p class="mt-4 text-lg leading-relaxed text-ink/70">Стоимость групповых занятий зависит от размера группы.</p>
-  </div>
-  <div class="mx-auto mt-12 grid max-w-5xl gap-4 lg:grid-cols-3">
-    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
-      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Разовая консультация</p>
-      <p class="mt-3 text-4xl font-extrabold">4 500 ₽</p>
-      <p class="mt-3 text-sm leading-relaxed text-ink/65">Вы можете выбрать тему из курса или задать свой вопрос.</p>
-      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
-        <li class="flex gap-2"><span class="text-accent">✓</span>1 час онлайн</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Теория и решение задач</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Материалы для самостоятельной работы</li>
-      </ul>
-      <a href="#signup" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Записаться</a>
-    </div>
-    <div class="reveal flex flex-col rounded-4xl bg-white p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover">
-      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-ink/40">Стандартный курс</p>
-      <p class="mt-3 text-4xl font-extrabold">35 000 ₽</p>
-      <p class="mt-3 text-sm leading-relaxed text-ink/65">Все темы базового курса + углублённая подготовка к вопросам средней сложности.</p>
-      <ul class="mt-6 flex-1 space-y-2.5 text-sm text-ink/70">
-        <li class="flex gap-2"><span class="text-accent">✓</span>8 онлайн-уроков с автором курса</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Моковое собеседование</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Обратная связь от ментора</li>
-      </ul>
-      <a href="#signup" class="mt-6 rounded-full bg-ink py-3.5 text-center font-bold text-white transition hover:bg-accent">Записаться</a>
-    </div>
-    <div class="reveal relative flex flex-col overflow-hidden rounded-4xl bg-ink p-8 text-white shadow-cardHover transition hover:-translate-y-1">
-      <div class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/40 blur-3xl" aria-hidden="true"></div>
-      <p class="relative inline-flex w-fit rounded-full bg-accent px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-white">Продвинутый курс</p>
-      <p class="relative mt-3 text-4xl font-extrabold">45 000 ₽</p>
-      <p class="relative mt-3 text-sm leading-relaxed text-white/70">Все темы стандартного курса + подготовка к сложным вопросам и кейсам.</p>
-      <ul class="relative mt-6 flex-1 space-y-2.5 text-sm text-white/75">
-        <li class="flex gap-2"><span class="text-accent">✓</span>Всё, что включено в стандартный курс</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>4 дополнительных онлайн-консультации</li>
-        <li class="flex gap-2"><span class="text-accent">✓</span>Поддержка на время испытательного срока после трудоустройства</li>
-      </ul>
-      <a href="#signup" class="relative mt-6 rounded-full bg-accent py-3.5 text-center font-bold text-white shadow-cta transition hover:bg-accent-dark">Записаться</a>
     </div>
   </div>
 </section>
@@ -318,40 +319,48 @@ tailwind.config = {
     <div class="grid lg:grid-cols-2">
       <div class="relative p-8 sm:p-12">
         <div class="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
-        <h2 class="relative text-3xl font-extrabold tracking-tight sm:text-4xl">Записаться на&nbsp;курс</h2>
-        <p class="relative mt-4 text-lg leading-relaxed text-white/70">Оформите заявку на курс, указав контактные данные и предпочтительные даты и время.</p>
+        <h2 class="relative text-3xl font-extrabold tracking-tight sm:text-4xl">Оставить заявку на&nbsp;менторство</h2>
+        <p class="relative mt-4 text-lg leading-relaxed text-white/70">Расскажи коротко о своем опыте, целях и ближайших задачах — я отвечу и предложу формат работы.</p>
         <div class="relative mt-8 rounded-3xl bg-white/5 p-6 ring-1 ring-white/10">
-          <p class="font-mono text-sm text-white/50">Контакты</p>
-          <p class="mt-2 text-sm text-white/80">Email: <a href="mailto:g.grigorevsky@gmail.com" class="font-bold text-white hover:text-accent">g.grigorevsky@gmail.com</a></p>
-          <p class="mt-1 text-sm text-white/80">Telegram: <a href="https://t.me/bigzhuk" target="_blank" rel="noopener" class="font-bold text-white hover:text-accent">@bigzhuk</a></p>
+          <p class="font-mono text-sm text-white/50">Индивидуальные онлайн-уроки</p>
+          <p class="mt-1 text-3xl font-extrabold">от 4 500 ₽ <span class="text-lg font-bold text-white/60">за урок</span></p>
+          <p class="mt-2 text-sm text-white/60">Персональная программа: Golang, System Design, резюме, стратегия собеседований, карьерный план.</p>
         </div>
+        <p class="relative mt-6 text-sm leading-relaxed text-white/60">Не любите формы? Напишите мне напрямую:
+          <a href="https://t.me/bigzhuk" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-white/30 underline-offset-4 transition hover:decoration-white">Telegram&nbsp;@bigzhuk</a>
+        </p>
       </div>
-      <form id="signup-form" class="space-y-4 bg-white/[.04] p-8 ring-1 ring-white/10 sm:p-12" novalidate>
+      <form id="mentor-form" class="space-y-4 bg-white/[.04] p-8 ring-1 ring-white/10 sm:p-12" novalidate>
         <div>
           <label for="f-name" class="mb-1.5 block text-sm font-semibold text-white/80">Имя</label>
-          <input id="f-name" name="name" type="text" required placeholder="Как к вам обращаться" class="w-full rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent">
+          <input id="f-name" name="name" type="text" required placeholder="Как к тебе обращаться" class="w-full rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent">
         </div>
         <div>
-          <label for="f-contact" class="mb-1.5 block text-sm font-semibold text-white/80">Telegram или email</label>
-          <input id="f-contact" name="contact" type="text" required placeholder="@username или email" class="w-full rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent">
+          <label for="f-tg" class="mb-1.5 block text-sm font-semibold text-white/80">Telegram</label>
+          <input id="f-tg" name="telegram" type="text" required placeholder="@username" class="w-full rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent">
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="f-level" class="mb-1.5 block text-sm font-semibold text-white/80">Текущий уровень</label>
+            <select id="f-level" name="level" class="w-full appearance-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent [&>option]:text-ink">
+              <option>junior</option><option>junior+</option><option>middle</option><option>middle+</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-goal" class="mb-1.5 block text-sm font-semibold text-white/80">Цель</label>
+            <select id="f-goal" name="goal" class="w-full appearance-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent [&>option]:text-ink">
+              <option>собеседование</option><option>рост до middle</option><option>рост дохода</option><option>разбор резюме</option><option>Golang</option><option>System Design</option><option>другое</option>
+            </select>
+          </div>
         </div>
         <div>
-          <label for="f-course" class="mb-1.5 block text-sm font-semibold text-white/80">Что интересует</label>
-          <select id="f-course" name="course" class="w-full appearance-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent [&>option]:text-ink">
-            <option>Курс middle golang программист</option>
-            <option>Курс System Design</option>
-            <option>Разовая консультация</option>
-            <option>Другое</option>
-          </select>
+          <label for="f-comment" class="mb-1.5 block text-sm font-semibold text-white/80">Комментарий</label>
+          <textarea id="f-comment" name="comment" rows="3" placeholder="Пара слов о задаче" class="w-full resize-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
         </div>
-        <div>
-          <label for="f-dates" class="mb-1.5 block text-sm font-semibold text-white/80">Предпочтительные даты и время</label>
-          <textarea id="f-dates" name="dates" rows="3" placeholder="Например: будни после 19:00" class="w-full resize-none rounded-2xl border-0 bg-white/10 px-4 py-3 text-white placeholder-white/40 ring-1 ring-white/15 transition focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
-        </div>
-        <button type="submit" class="w-full rounded-full bg-accent px-7 py-4 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">Записаться</button>
+        <button type="submit" class="w-full rounded-full bg-accent px-7 py-4 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">Отправить заявку</button>
         <p id="form-success" class="hidden rounded-2xl bg-mint px-4 py-3 text-center text-sm font-bold text-emerald-800">Спасибо! Заявка отправлена.</p>
         <p id="form-error" class="hidden rounded-2xl bg-rose-100 px-4 py-3 text-center text-sm font-bold text-rose-700">Не получилось отправить. Напишите в Telegram <a href="https://t.me/bigzhuk" class="underline">@bigzhuk</a> или на почту.</p>
-        <p class="text-center text-xs text-white/40">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</p>
+        <p class="text-center text-xs text-white/40">Нажимая кнопку, ты соглашаешься с политикой конфиденциальности.</p>
       </form>
     </div>
   </div>
@@ -360,7 +369,8 @@ tailwind.config = {
 <!-- ══════════ 8. ОТЗЫВЫ ══════════ -->
 <section id="reviews" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12">
   <div class="reveal max-w-3xl">
-    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Отзывы</h2>
+    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Настоящие отзывы</h2>
+    <p class="mt-4 text-lg leading-relaxed text-ink/70">Все отзывы на сайте реальные. По запросу я могу дать вам контакты моих учеников, и они это подтвердят.</p>
   </div>
   <div class="reveal mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 no-scrollbar lg:grid lg:grid-cols-3 lg:overflow-visible">
     <figure class="min-w-[85%] snap-start rounded-3xl bg-white p-7 shadow-card sm:min-w-[45%] lg:min-w-0">
@@ -397,7 +407,7 @@ tailwind.config = {
     <div class="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
     <div class="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-violet-500/25 blur-3xl" aria-hidden="true"></div>
     <h2 class="relative mx-auto max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">Готов сделать следующий шаг?</h2>
-    <p class="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/70">Выбери направление подготовки — Golang или System Design — и оформи заявку.</p>
+    <p class="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/70">Выбери направление подготовки — Golang или System Design — и пройди курс.</p>
     <div class="relative mt-9 flex flex-wrap justify-center gap-3">
       <a href="golang/" class="rounded-full bg-accent px-7 py-3.5 font-bold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-accent-dark">Курс Golang</a>
       <a href="system-design/" class="rounded-full bg-white px-7 py-3.5 font-bold text-ink transition hover:-translate-y-0.5">Курс System Design</a>
@@ -424,7 +434,7 @@ tailwind.config = {
         <li><a href="golang/" class="hover:text-accent">Курс Golang</a></li>
         <li><a href="system-design/" class="hover:text-accent">Курс System Design</a></li>
         <li><a href="#about" class="hover:text-accent">Обо мне</a></li>
-        <li><a href="#price" class="hover:text-accent">Менторство</a></li>
+        <li><a href="#signup" class="hover:text-accent">Менторство</a></li>
         <li><a href="#reviews" class="hover:text-accent">Отзывы</a></li>
       </ul>
     </div>
@@ -448,12 +458,12 @@ tailwind.config = {
 
 <script>
 // ── Форма ──
-document.getElementById('signup-form').addEventListener('submit', function (e) {
+document.getElementById('mentor-form').addEventListener('submit', function (e) {
   e.preventDefault();
   const name = document.getElementById('f-name');
-  const contact = document.getElementById('f-contact');
+  const tg = document.getElementById('f-tg');
   let ok = true;
-  [name, contact].forEach(el => {
+  [name, tg].forEach(el => {
     el.classList.remove('ring-2', 'ring-rose-400');
     if (!el.value.trim()) { el.classList.add('ring-2', 'ring-rose-400'); ok = false; }
   });
@@ -470,9 +480,11 @@ document.getElementById('signup-form').addEventListener('submit', function (e) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       name: name.value.trim(),
-      contact: contact.value.trim(),
-      course: document.getElementById('f-course').value,
-      dates: document.getElementById('f-dates').value.trim(),
+      contact: tg.value.trim(),
+      course: 'Менторство',
+      level: document.getElementById('f-level').value,
+      goal: document.getElementById('f-goal').value,
+      comment: document.getElementById('f-comment').value.trim(),
     }),
   })
     .then(r => { if (!r.ok) throw new Error('http ' + r.status); })
@@ -483,7 +495,7 @@ document.getElementById('signup-form').addEventListener('submit', function (e) {
     })
     .catch(() => {
       button.disabled = false;
-      button.textContent = 'Записаться';
+      button.textContent = 'Отправить заявку';
       error.classList.remove('hidden');
     });
 });
