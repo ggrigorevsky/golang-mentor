@@ -122,3 +122,20 @@ func TestCachedReviewsServesStaleOnError(t *testing.T) {
 		t.Errorf("ожидали тот же (устаревший) ответ из кэша")
 	}
 }
+
+func TestDisplayNameHidesAnonymous(t *testing.T) {
+	cases := map[string]string{
+		"Алексей Герасимов":      "Алексей Герасимов",
+		"  Olga Borisyuk  ":      "Olga Borisyuk",
+		"Anonymous 480958695":    defaultReviewerName,
+		"anonymous":              defaultReviewerName,
+		"":                       defaultReviewerName,
+		"   ":                    defaultReviewerName,
+		"Anonymous Пользователь": "Anonymous Пользователь",
+	}
+	for in, want := range cases {
+		if got := displayName(in); got != want {
+			t.Errorf("displayName(%q) = %q, ожидали %q", in, got, want)
+		}
+	}
+}

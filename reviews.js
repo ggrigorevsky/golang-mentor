@@ -79,8 +79,30 @@
 
     var track = section.querySelector('.rv-track');
     setupAvatars(section);
-    setupClamps(section);
-    setupNav(section, track);
+    var recheckClamps = setupClamps(section);
+    var syncNav = setupNav(section, track);
+
+    // Tailwind Play CDN генерирует классы для вставленного DOM асинхронно,
+    // поэтому сразу после innerHTML карточки ещё не той ширины. Меряем заново
+    // каждый раз, когда размеры действительно меняются.
+    var refresh = debounce(function () {
+      recheckClamps();
+      syncNav();
+    }, 60);
+
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(refresh);
+      ro.observe(track);
+      var cards = section.querySelectorAll('article');
+      for (var i = 0; i < cards.length; i++) ro.observe(cards[i]);
+    }
+    window.addEventListener('resize', refresh);
+    if (document.readyState !== 'complete') window.addEventListener('load', refresh);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+    // Страховка на случай, если ResizeObserver недоступен.
+    requestAnimationFrame(refresh);
+    setTimeout(refresh, 300);
+    setTimeout(refresh, 1200);
 
     // Секция вставлена после того, как страница уже настроила свои .reveal,
     // поэтому анимацию появления запускаем вручную.
@@ -192,9 +214,7 @@
     }
 
     recheck();
-    window.addEventListener('resize', debounce(recheck, 150));
-    // Шрифты доезжают позже и меняют высоту текста.
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(recheck);
+    return recheck;
   }
 
   // ── Стрелки, точки, клавиатура ─────────────────────────────────────────────
@@ -226,6 +246,9 @@
 
     function buildDots() {
       var n = pages();
+      // Пересобираем, только если число страниц изменилось, иначе точки
+      // моргали бы на каждом пересчёте.
+      if (n === dots.childElementCount || (n < 2 && dots.childElementCount === 0)) return;
       if (n < 2) { dots.innerHTML = ''; return; }
       var html = '';
       for (var i = 0; i < n; i++) {
@@ -267,10 +290,8 @@
       raf = requestAnimationFrame(sync);
     }, { passive: true });
 
-    window.addEventListener('resize', debounce(function () { buildDots(); sync(); }, 150));
-
-    // Картинки и шрифты могут доехать позже и изменить высоту/ширину дорожки.
-    window.addEventListener('load', function () { buildDots(); sync(); });
+    // Возвращаем пересборку наружу: её дёргает общий refresh в render().
+    return function () { buildDots(); sync(); };
   }
 
   function navButton(dir, label, path) {

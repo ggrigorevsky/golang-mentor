@@ -21,6 +21,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -235,10 +236,10 @@ func buildReviews(ctx context.Context, courseID int64) ([]byte, error) {
 	}
 
 	for _, rv := range picked {
-		name := "Ученик Stepik"
+		name := defaultReviewerName
 		avatar := ""
 		if u, ok := users[rv.User]; ok {
-			if n := strings.TrimSpace(u.FullName); n != "" {
+			if n := displayName(u.FullName); n != "" {
 				name = n
 			}
 			avatar = u.Avatar
@@ -256,6 +257,20 @@ func buildReviews(ctx context.Context, courseID int64) ([]byte, error) {
 	}
 
 	return json.Marshal(out)
+}
+
+const defaultReviewerName = "Ученик Stepik"
+
+// Пользователям без имени Stepik подставляет «Anonymous 480958695».
+// На лендинге это выглядит как мусор, поэтому заменяем на нейтральную подпись.
+var anonymousName = regexp.MustCompile(`^(?i)anonymous\s*\d*$`)
+
+func displayName(full string) string {
+	full = strings.TrimSpace(full)
+	if full == "" || anonymousName.MatchString(full) {
+		return defaultReviewerName
+	}
+	return full
 }
 
 // fetchStepikReviews выкачивает отзывы курса, свежие сначала.
