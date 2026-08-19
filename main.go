@@ -35,6 +35,9 @@ type config struct {
 	SMTPPass  string
 	MailTo    string
 	StaticDir string
+	// DevNoMail — локальный запуск без почты (DEV=1). Сервер стартует и раздаёт
+	// сайт, но форма заявки отвечает ошибкой вместо отправки письма.
+	DevNoMail bool
 }
 
 func loadConfig() (config, error) {
@@ -48,7 +51,12 @@ func loadConfig() (config, error) {
 	}
 	cfg.MailTo = envOr("MAIL_TO", cfg.SMTPUser)
 	if cfg.SMTPUser == "" || cfg.SMTPPass == "" {
-		return cfg, fmt.Errorf("не заданы SMTP_USER и/или SMTP_PASS")
+		// В проде отсутствие почты — фатальная ошибка: лучше не подняться,
+		// чем молча терять заявки. Локально хватает DEV=1.
+		if os.Getenv("DEV") == "" {
+			return cfg, fmt.Errorf("не заданы SMTP_USER и/или SMTP_PASS (для локального запуска: DEV=1 go run .)")
+		}
+		cfg.DevNoMail = true
 	}
 	return cfg, nil
 }
@@ -68,6 +76,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /api/signup", signupHandler(cfg))
+	mux.HandleFunc("GET /api/reviews", reviewsHandler())
 	mux.Handle("/", staticHandler(cfg.StaticDir))
 
 	srv := &http.Server{
@@ -77,7 +86,11 @@ func main() {
 		ReadTimeout:       10 * time.Second,
 		WriteTimeout:      30 * time.Second,
 	}
-	log.Printf("сервер запущен на %s, заявки уходят на %s", cfg.Addr, cfg.MailTo)
+	if cfg.DevNoMail {
+		log.Printf("сервер запущен на %s в режиме DEV: почта не настроена, заявки из формы отправляться не будут", cfg.Addr)
+	} else {
+		log.Printf("сервер запущен на %s, заявки уходят на %s", cfg.Addr, cfg.MailTo)
+	}
 	log.Fatal(srv.ListenAndServe())
 }
 
@@ -125,6 +138,11 @@ type signupRequest struct {
 
 func signupHandler(cfg config) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		if cfg.DevNoMail {
+			writeJSON(w, http.StatusServiceUnavailable, "локальный запуск без почты: задайте SMTP_USER и SMTP_PASS")
+			return
+		}
+
 		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
 		if !allow(ip) {
 			writeJSON(w, http.StatusTooManyRequests, "слишком часто, попробуйте через минуту")

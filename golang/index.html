@@ -158,6 +158,14 @@ tailwind.config = {
   </div>
 </section>
 
+<!-- ══════════ ОТЗЫВЫ (подтягиваются со Stepik) ══════════ -->
+<section id="reviews"
+         class="mx-auto max-w-6xl scroll-mt-20 px-4 py-8 sm:px-6 md:py-12"
+         data-reviews="golang"
+         data-reviews-title="Что говорят студенты курса"
+         data-reviews-lead="Отзывы приходят прямо со страницы курса на Stepik — новый отзыв появляется здесь автоматически."
+         hidden></section>
+
 <!-- ══════════ 3. ПРЕИМУЩЕСТВА ОНЛАЙН-КУРСА ══════════ -->
 <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12">
   <div class="reveal max-w-3xl">
@@ -500,5 +508,6 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   }, { threshold: 0 }).observe(slot);
 })();
 </script>
+<script src="../reviews.js" defer></script>
 </body>
 </html>
