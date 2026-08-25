@@ -41,7 +41,7 @@ GO           ?= go
 # Курс, на котором проверяем живость API после перезапуска.
 HEALTH_URL := http://127.0.0.1:$(PORT)/api/reviews?course=golang
 
-.PHONY: help deploy deploy-force pull check build install-bin restart \
+.PHONY: help dev deploy deploy-force pull check build install-bin restart \
         health status logs info rollback show-service nginx-reload
 
 ## help: показать список команд
@@ -54,6 +54,16 @@ help:
 	@echo "Бинарник:     $(DEPLOY_BIN)"
 	@echo "Сервис:       $(SERVICE).service (от $(SERVICE_USER))"
 	@echo "Переменные:   $(ENV_FILE)"
+
+## dev: поднять сайт локально на http://localhost:$(PORT)
+dev:
+	@if [ -f local.env ]; then \
+		echo "Переменные из local.env — форма заявки будет слать письма по-настоящему."; \
+		set -a; . ./local.env; set +a; ADDR=":$(PORT)" $(GO) run .; \
+	else \
+		echo "local.env не найден — поднимаю с DEV=1, форма заявки вернёт ошибку вместо письма."; \
+		DEV=1 ADDR=":$(PORT)" $(GO) run .; \
+	fi
 
 ## deploy: обновить код, пересобрать бинарник, разложить и перезапустить сервис
 deploy: pull check build install-bin restart health
