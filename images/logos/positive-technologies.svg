@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Positive Technologies">
+  <rect x="0" y="0" width="32" height="32" rx="3.2" fill="#E53323"/>
+  <path d="M6.18 10.66h2.91v15.07H6.18z" fill="#FFFFFF"/>
+  <path fill="#FFFFFF" fill-rule="evenodd" d="M11.78 10.53a5.47 5.47 0 1 1 0 10.94 5.47 5.47 0 0 1 0-10.94zm0 2.65a2.82 2.82 0 1 0 0 5.64 2.82 2.82 0 0 0 0-5.64z"/>
+  <path fill="#FFFFFF" d="M18.85 6.53h2.94v4.13h4.45v2.62h-4.45V16c0 1.92 1.25 2.72 3.01 2.72h1.44v2.62H22.4c-1.6 0-3.55-1.82-3.55-4.7z"/>
+</svg>
