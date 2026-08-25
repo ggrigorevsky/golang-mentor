@@ -120,18 +120,30 @@ tailwind.config = {
 <!-- ══════════ NAV ══════════ -->
 <header class="sticky top-0 z-40 border-b border-ink/5 bg-smoke/80 backdrop-blur-xl">
   <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-    <a href="#top" class="flex items-center gap-2 font-extrabold tracking-tight">
+    <a href="../" class="flex items-center gap-2 font-extrabold tracking-tight">
       <span class="grid h-8 w-8 place-items-center rounded-xl bg-accent font-mono text-sm text-white">SD</span>
       <span class="hidden sm:inline">System Design<span class="text-accent">.</span>Курс</span>
     </a>
     <div class="hidden items-center gap-6 text-sm font-semibold text-ink/70 lg:flex">
-      <a href="../" class="transition hover:text-ink">Главная</a>
       <a href="#program" class="transition hover:text-ink">Программа</a>
       <a href="#demo" class="transition hover:text-ink">Бесплатный урок</a>
+      <div class="group relative">
+        <a href="../#courses" class="flex items-center gap-1 transition hover:text-ink" aria-haspopup="true">
+          Курсы
+          <svg class="h-3.5 w-3.5 transition group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <div class="invisible absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div class="overflow-hidden rounded-2xl bg-white p-2 shadow-cardHover ring-1 ring-ink/5">
+            <a href="../golang/" class="block rounded-xl px-4 py-2.5 transition hover:bg-smoke hover:text-ink">Golang</a>
+            <a href="../system-design/" class="block rounded-xl px-4 py-2.5 transition hover:bg-smoke hover:text-ink">System Design</a>
+          </div>
+        </div>
+      </div>
       <a href="#mentorship" class="transition hover:text-ink">Менторство</a>
+      <a href="/game" class="transition hover:text-ink">Игра</a>
     </div>
     <div class="flex items-center gap-2">
-      <a href="#mentorship-form" class="hidden rounded-full px-4 py-2 text-sm font-semibold text-ink/70 transition hover:text-ink sm:inline-block">Менторство</a>
+      <a href="#mentorship-form" class="hidden rounded-full px-4 py-2 text-sm font-semibold text-ink/70 transition hover:text-ink sm:inline-block">Оставить заявку</a>
       <a href="https://stepik.org/a/292577?utm_source=golang_mentor&utm_medium=landing&utm_content=nav" target="_blank" rel="noopener" class="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent">Купить курс</a>
     </div>
   </nav>
